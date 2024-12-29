@@ -11,15 +11,15 @@ import matplotlib.pyplot as plt
 import bisect
 from gym.wrappers import RecordVideo, RecordEpisodeStatistics, TimeLimit
 
-NN_size = [32, 32]
+NN_size = [128, 128, 128]
 use_saved_model = False # use a previous model saved on the same path as this file
 save_weights = True # overwrite weights of the model in the file or create new weights
 save_video = True # set whether we want to save or watch video
 video_id = '1' # this is a special id to help distinguish between different saved models 
 
 num_iters = 10000
-epslion_convergence_steps = 1000
-epsilon_min = .1 # the minimum epsilon that system will use after epslion_convergence_steps sim runs
+epslion_convergence_steps = 3000
+epsilon_min = .05 # the minimum epsilon that system will use after epslion_convergence_steps sim runs
 
 # # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
@@ -58,7 +58,7 @@ class HyperParams():
     main_nn = tf.keras.models.load_model(model_name)
     target_nn = tf.keras.models.load_model(model_name)
     print("Saved weights loaded")
-    epsilon = .1
+    epsilon = epsilon_min
     epsilon_step = 0
   else:
     main_nn = DQN()
